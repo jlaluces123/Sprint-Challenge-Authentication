@@ -42,7 +42,7 @@ function login(req, res) {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(credentials.password, user.password)) {
-        console.log(user);
+        console.log(user, 'USER');
         const token = generateToken(user);
         // on succcess, create a new JWT with user id as subject
         res.status(200).json({ welcome: user.username, token });
