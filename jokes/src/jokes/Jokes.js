@@ -12,7 +12,12 @@ class Jokes extends Component {
         <h2>Lets have a good laugh</h2>
         <ul>
           {this.state.jokes.map(jokes => (
-            <h2>work</h2>
+            <div className='jokes'>
+              <li key={jokes.id}>{jokes.setup}...{jokes.punchline}</li>
+              <br />
+              <br />
+              <br />
+            </div>
           ))}
         </ul>
       </div>
@@ -31,7 +36,7 @@ class Jokes extends Component {
       .get(endpoint, options)
       .then(res => {
         console.log(res.data, 'RES.DATA FROM JOKES.JS');
-        this.setState({ jokes: res.data.jokes });
+        this.setState({ jokes: res.data });
       })
       .catch(err => {
         console.error('ERROR', err);

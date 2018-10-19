@@ -15,6 +15,11 @@ const Home = props => {
 }
 
 class App extends Component {
+
+  signOut = () => {
+    localStorage.removeItem('jwt');    
+  };
+
   render() {
     return (
       <div className="App">
