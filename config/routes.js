@@ -21,15 +21,11 @@ function register(req, res) {
     .insert(credentials)
     .then(ids => {
       const id = ids[0];
-      return db('users').where({ username: credentials.username }).first()
-      // so when a user registers, they don't have to login for a token
-        .then(res => {
-          const token = generateToken(res);
-          res.status(201).json({ welcome: res.username, token })
-        })
+      const token = generateToken({ username: credentials.username });
+      return res.status(201).json({ newUserId: id, token });
     })
     .catch(err => {
-      res.status(500).json({ error: 'register not working' });
+      res.status(500).json({ error: 'register not working?' });
     })
 };
 
