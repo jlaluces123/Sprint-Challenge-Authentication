@@ -27,6 +27,7 @@ function authenticate(req, res, next) {
   }
 }
 
+const jwtSecret = 'nobody tosses a dwarf!';
 function generateToken(user) {
   const jwtPayload = {
     ...user,
