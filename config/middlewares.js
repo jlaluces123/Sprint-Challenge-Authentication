@@ -30,12 +30,11 @@ function authenticate(req, res, next) {
 function generateToken(user) {
   const jwtPayload = {
     ...user,
-    hello: 'User',
-    roles: 'admin'
+    hello: 'User'
   };
 
   const jwtOptions = {
-    expiresIn: '3m'
+    expiresIn: '1m'
   };
 
   return jwt.sign(jwtPayload, jwtKey, jwtOptions);

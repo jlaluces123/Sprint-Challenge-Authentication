@@ -14,7 +14,7 @@ function register(req, res) {
   // implement user registration
   const credentials = req.body;
 
-  const hash = bcrypt.hashSync(credentials.password, 10);
+  const hash = bcrypt.hashSync(credentials.password, 14);
   credentials.password = hash;
 
   db('users')
@@ -31,7 +31,7 @@ function register(req, res) {
     .catch(err => {
       res.status(500).json(err);
     })
-}
+};
 
 function login(req, res) {
   // implement user login
