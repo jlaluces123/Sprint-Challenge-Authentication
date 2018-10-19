@@ -12,22 +12,22 @@ module.exports = server => {
 
 function register(req, res) {
   // implement user registration
-  const credentials = req.body;
+  const creds = req.body;
 
-  const hash = bcrypt.hashSync(credentials.password, 14);
-  credentials.password = hash;
+  const hash = bcrypt.hashSync(creds.password, 14);
+  creds.password = hash;
 
   db('users')
-    .insert(credentials)
+    .insert(creds)
     .then(ids => {
       const id = ids[0];
-      const token = generateToken({ username: credentials.username });
+      const token = generateToken({ username: creds.username });
       return res.status(201).json({ newUserId: id, token });
     })
     .catch(err => {
-      res.status(500).json({ error: 'register not working?' });
-    })
-};
+      return res.status(500).json(err);
+    });
+}
 
 function login(req, res) {
   // implement user login
